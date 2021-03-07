@@ -97,3 +97,27 @@ ScrollReveal().reveal(".btn-outline", { delay: 200 });
 ScrollReveal().reveal(".testmonial-slider");
 // Contact form
 ScrollReveal().reveal(".contact-inner");
+
+// Submit contact form and send Email to my gmail
+document
+  .getElementById("basic-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    this.fName.value = document.getElementById("fName").value;
+    this.lName.value = document.getElementById("lName").value;
+    this.eMail.value = document.getElementById("eMail").value;
+    this.message.value = document.getElementById("message").value;
+    this.phone.value = document.getElementById("phone").value;
+
+    emailjs
+      .sendForm("gmail-krsteski", "template_g6egrlm", this)
+      .then(
+        function () {
+          console.log("SUCCESS!");
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      )
+      .then(() => document.getElementById("basic-form").reset());
+  });
